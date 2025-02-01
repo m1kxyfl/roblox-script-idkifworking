@@ -16,7 +16,7 @@ openButton.BackgroundColor3 = Color3.fromRGB(0, 128, 255)
 openButton.BorderSizePixel = 0
 openButton.Parent = screenGui
 addUICorner(openButton, 10)  
-openButton.Font = Enum.Font.SourceSansBold  
+openButton.Font = Enum.Font.SourceSansBold 
 local frame = Instance.new("Frame")
 frame.Size = UDim2.new(0.5, 0, 0.5, 0)
 frame.Position = UDim2.new(0.25, 0, 0.25, 0)
@@ -28,7 +28,7 @@ addUICorner(frame, 20)
 local textLabel = Instance.new("TextLabel")
 textLabel.Size = UDim2.new(1, 0, 0.2, 0)
 textLabel.Position = UDim2.new(0, 0, 0, 0)
-textLabel.Text = "Wallhacks"
+textLabel.Text = "Highlight Players"
 textLabel.TextColor3 = Color3.fromRGB(0, 0, 0)
 textLabel.TextSize = 24
 textLabel.BackgroundTransparency = 1  
@@ -37,7 +37,7 @@ textLabel.Font = Enum.Font.SourceSansBold
 local toggleButton = Instance.new("TextButton")
 toggleButton.Size = UDim2.new(0, 200, 0, 50)
 toggleButton.Position = UDim2.new(0.5, -100, 0.5, -25)
-toggleButton.Text = "Toggle Wallhack"
+toggleButton.Text = "Toggle Highlight"
 toggleButton.TextSize = 20
 toggleButton.TextColor3 = Color3.fromRGB(255, 255, 255)
 toggleButton.BackgroundColor3 = Color3.fromRGB(0, 128, 255)
@@ -56,10 +56,19 @@ closeButton.BorderSizePixel = 0
 closeButton.Parent = frame
 addUICorner(closeButton, 10)
 closeButton.Font = Enum.Font.SourceSansBold
--- Store the state of highlights (whether they are activated or not)
+local creditLabel = Instance.new("TextLabel")
+creditLabel.Size = UDim2.new(1, 0, 0.1, 0)  
+creditLabel.Position = UDim2.new(0, 0, 1, -30)  
+creditLabel.Text = "made by Mah1ky"
+creditLabel.TextSize = 18
+creditLabel.TextColor3 = Color3.fromRGB(0, 0, 0)  
+creditLabel.BackgroundTransparency = 1  
+creditLabel.Font = Enum.Font.SourceSansBold  
+creditLabel.Parent = frame
 local highlightsEnabled = false
 local function toggleHighlightPlayers()
 	highlightsEnabled = not highlightsEnabled  
+	-- First, remove any existing highlights from players
 	for _, child in pairs(workspace:GetChildren()) do
 		if child:IsA("Model") and child:FindFirstChild("Highlight") then
 			child.Highlight:Destroy()
@@ -96,9 +105,9 @@ local function toggleHighlightPlayers()
 		end
 	end
 	if highlightsEnabled then
-		textLabel.Text = "Wallhacks: ON"
+		textLabel.Text = "Highlight: ON"
 	else
-		textLabel.Text = "Wallhacks: OFF"
+		textLabel.Text = "Highlight: OFF"
 	end
 end
 toggleButton.MouseButton1Click:Connect(function()
